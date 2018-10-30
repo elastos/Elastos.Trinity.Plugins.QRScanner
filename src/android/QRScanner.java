@@ -1,5 +1,6 @@
 package com.bitpay.cordova.qrscanner;
 
+import org.elastos.trinity.dapprt.TrinityPlugin;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
@@ -35,7 +36,7 @@ import java.util.List;
 
 
 @SuppressWarnings("deprecation")
-public class QRScanner extends CordovaPlugin implements BarcodeCallback {
+public class QRScanner extends TrinityPlugin implements BarcodeCallback {
 
     private CallbackContext callbackContext;
     private boolean cameraClosing;
