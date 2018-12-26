@@ -3,7 +3,7 @@
   "version": "2.6.0",
   "description": "Fast, energy-efficient, highly-configurable QR code scanner.",
   "cordova": {
-    "id": "cordova-plugin-qrscanner",
+    "id": "elastos-trinity-plugins-qrscanner",
     "platforms": [
       "ios"
     ]
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitpay/cordova-plugin-qrscanner"
+    "url": "git+https://github.com/elastos/Elastos.Trinity.Plugins.QRScanner.git"
   },
   "keywords": [
     "cordova",
