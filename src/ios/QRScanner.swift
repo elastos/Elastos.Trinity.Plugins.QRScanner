@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 
 @objc(QRScanner)
-class QRScanner : CDVPlugin, AVCaptureMetadataOutputObjectsDelegate {
+class QRScanner : TrinityPlugin, AVCaptureMetadataOutputObjectsDelegate {
     
     class CameraView: UIView {
         var videoPreviewLayer:AVCaptureVideoPreviewLayer?
