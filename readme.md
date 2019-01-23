@@ -29,8 +29,9 @@ QRScanner's native camera preview is rendered behind the Cordova app's webview, 
 ## Get Started
 
 ```bash
-cordova plugin add elastos-trinity-plugins-qrscanner
+cordova plugin add https://github.com/elastos/Elastos.Trinity.Plugins.QRScanner.git
 ```
+The plugins field of dapp manifest.json adds QRScanner values, such as "plugins": ["XXXX", "QRScanner", "XXXX"]
 
 Simply adding this plugin to the Cordova project will make the `window.QRScanner` global object available once the `deviceready` event propagates.
 
