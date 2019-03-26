@@ -1,6 +1,6 @@
 package com.bitpay.cordova.qrscanner;
 
-import org.elastos.trinity.dapprt.TrinityPlugin;
+import org.elastos.trinity.runtime.TrinityPlugin;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.FeatureInfo;
