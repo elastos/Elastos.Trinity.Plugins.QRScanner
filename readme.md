@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/bitpay/elastos-trinity-plugins-qrscanner.svg?branch=master)](https://travis-ci.org/bitpay/elastos-trinity-plugins-qrscanner) [![npm](https://img.shields.io/npm/v/elastos-trinity-plugins-qrscanner.svg)](https://www.npmjs.com/package/elastos-trinity-plugins-qrscanner) [![npm](https://img.shields.io/npm/dm/elastos-trinity-plugins-qrscanner.svg)](https://www.npmjs.com/package/elastos-trinity-plugins-qrscanner)
-[![Dependency Status](https://david-dm.org/bitpay/elastos-trinity-plugins-qrscanner.svg)](https://david-dm.org/bitpay/elastos-trinity-plugins-qrscanner)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # elastos-trinity-plugins-qrscanner
 A fast, energy efficient, highly-configurable QR code scanner for Cordova apps – available for the iOS, Android, Windows, and browser platforms.
@@ -28,10 +25,7 @@ QRScanner's native camera preview is rendered behind the Cordova app's webview, 
 
 ## Get Started
 
-```bash
-cordova plugin add https://github.com/elastos/Elastos.Trinity.Plugins.QRScanner.git
-```
-The plugins field of dapp manifest.json adds QRScanner values, such as "plugins": ["XXXX", "QRScanner", "XXXX"]
+  The plugins field of dapp manifest.json adds QRScanner values, such as "plugins": ["XXXX", "QRScanner", "XXXX"]
 
 Simply adding this plugin to the Cordova project will make the `window.QRScanner` global object available once the `deviceready` event propagates.
 
@@ -376,21 +370,6 @@ Unlike iOS, on Android >=6.0, permissions can be requested multiple times. If th
 
 Because of API limitations, `status.restricted` will always be false on the Android platform. See [#15](https://github.com/bitpay/elastos-trinity-plugins-qrscanner/issues/15) for details. Pull requests welcome!
 
-## Windows
-
-Before testing - ensure the Windows Phone SDK is installed. In order to deploy from the command line Windows Phone 8.0 SDK and Visual Studio 2012 update 2 (or later) must be installed. Visual Studio 2015 is recommended for debugging Windows desktop apps.
-
-The Windows platform renders an impervious white layer behind its browser- the video preview is not behind the webView, but is actually an HTML element that is carefully managed. Hide and show change the style properties (visibility) of the preview.
-
-## Browser
-
-While the browser implementation matches the native mobile implementations very closely, the platform itself does not. Notably:
-
-- **multiple cameras** – most laptops/desktops do not have access to multiple cameras – so there is no concept of a "front" or "back" camera
-- **light** – we are not aware of any devices for the `browser` platform which have a "light" (aka. "torch") – should a device like this be produced, and if [this spec](http://w3c.github.io/mediacapture-image/#filllightmode) is [implemented by Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=485972), this plugin will attempt to support it.
-
-The browser implementation of this plugin is designed to abstract these platform differences very thoroughly. It's recommended that you focus your development efforts on implementing this plugin well for one of the mobile platform, and the browser platform implementation will degrade gracefully from there.
-
 ### Video Preview DOM Element
 
 Unlike the other platforms, it's not possible to spawn the `<video>` preview behind the `<html>` and `<body>` using only Javascript. Trying to mimick the effect by making the element a sibling to either the `<html>` or `<body>` elements also produces inconsistent results (ie: no rendering on Chromium). Instead, this plugin appends the `<video>` element as the final child of the `<body>` element, and applies styling to cover the entire background.
@@ -415,48 +394,8 @@ If more cameras are available, the "front" camera is then chosen from the highes
 
 ### Light
 
-The browser platform always returns the boolean `status.canEnableLight` as `false`, and the enableLight/disableLight methods throw the `LIGHT_UNAVAILABLE` error code.
-
 `status.canEnableLight` is camera specific, meaning it will return `false` if the camera in use does not have a flash.
 
 #### Using Status.authorized
 
 Both Electron and NW.js automatically provide authorization to access the camera (without user confirmation) to bundled applications. This difference can't be detected via an API this plugin can implement, so the `authorized` property on any returned Status objects will be `false` on startup, even when it should be `true`. You should adjust your code to assume that these platforms are always authorized. (ie: Skip "permission priming" on these platforms.)
-
-On the `browser` platform, the `authorized` field is set to `true` if at least one camera is available **and** the user has granted the application access to at least one camera. On Electron and NW.js, this field can reliably be used to determine if a camera is available to the device.
-
-### Adjusting Scan Speed vs. CPU/Power Usage (uncommon)
-
-On the browser platform, it's possible to adjust the interval at which QR decode attempts occur – even while a scan is happening. This enables applications to intellegently adjust scanning speed in different application states. QRScanner will check for the presence of the global variable `window.QRScanner_SCAN_INTERVAL` before scheduling each next QR decode. If not set, the default of `130` (milliseconds) is used.
-
-## Typescript
-Type definitions for elastos-trinity-plugins-qrscanner are [available in the DefinitelyTyped project](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/elastos-trinity-plugins-qrscanner/elastos-trinity-plugins-qrscanner.d.ts).
-
-## Contributing &amp; Testing
-
-To contribute, first install the dependencies:
-
-```sh
-npm install
-```
-
-Then setup the test project:
-
-```sh
-npm run gen-tests
-```
-
-This will create a new cordova project in the `elastos-trinity-plugins-test-projects` directory next to this repo, install `elastos-trinity-plugins-qrscanner`, and configure the [Cordova Plugin Test Framework](https://github.com/apache/elastos-trinity-plugins-test-framework). Once the platform tests are generated, the following commands are available:
-
-- `npm run test:android`
-- `npm run test:browser`
-- `npm run test:ios`
-- `npm run test:windows`
-
-Both Automatic Tests (via Cordova Plugin Test Framework's built-in [Jasmine](https://github.com/jasmine/jasmine)) and Manual Tests are available. Automatic tests confirm the existence and expected structure of the javascript API, and manual tests should be used to confirm functionality on each platform.
-
-The manual tests for the library are available without the cordova test project:
-
-- `npm run test:library`
-
-The build for this repo currently only confirms javascript style and syntax with [jshint](https://github.com/jshint/jshint). Pull requests with additional automated test methods are welcome!
