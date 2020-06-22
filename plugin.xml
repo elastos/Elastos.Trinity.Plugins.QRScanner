@@ -34,7 +34,7 @@
       <string>The camera is used to scan QR codes.</string>
     </config-file>
   </platform>
-  <platform name="browser">
+  <!--<platform name="browser">
     <config-file target="config.xml" parent="/*">
       <feature name="QRScanner">
         <param name="browser-package" value="QRScanner" />
@@ -43,7 +43,7 @@
     <js-module src="src/browser/plugin.min.js" name="QRScannerProxy">
       <runs />
     </js-module>
-  </platform>
+  </platform>-->
   <platform name="windows">
     <config-file target="config.xml" parent="/*">
       <feature name="QRScanner">
