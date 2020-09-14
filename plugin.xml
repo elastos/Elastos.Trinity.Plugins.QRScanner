@@ -64,4 +64,9 @@
     <hook src="hooks/windows/check-arch.js" type="before_compile" />
     <hook src="hooks/windows/check-arch.js" type="before_run" />
   </platform>
+  <platform name="electron">
+	<js-module src="src/electron/QRScannerPluginProxy.js" name="QRScannerPluginProxy">
+		<runs />
+	</js-module>
+  </platform>
 </plugin>
